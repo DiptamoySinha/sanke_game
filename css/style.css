@@ -1,0 +1,40 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+body
+{
+    background: url("../img/bg.jpg");
+    min-height: 100vh;
+    background-size: 100vw 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#board
+{
+    background: linear-gradient(rgb(194, 205, 185), rgb(222, 222, 182));
+    width: 90vmin;
+    height: 92vmin;
+    display: grid;
+    grid-template-rows: repeat(18, 1fr);
+    grid-template-columns: repeat(18, 1fr);
+}
+
+.head
+{
+    background-color: red;
+
+}
+
+.snake
+{
+    background-color: green;
+}
+
+.food
+{
+    background-color: black;
+}
