@@ -1,9 +1,11 @@
+// all the variables
+
 let inputDir = {x:0, y:0};
 const foodSound = new Audio('music/food.mp3');
 const gameOverSound = new Audio('music/gameover.mp3');
 const moveSound = new Audio('music/move.mp3');
 const musicSound = new Audio('music/music.mp3');
-let speed = 5;
+let speed = 3;
 let lastPaintTime = 0;
 let snakeArr = [
     {x:13, y:15}
@@ -13,6 +15,15 @@ let score = 0;
 let food = {x: 5, y:5};
 
 let board = document.querySelector('#board');
+
+let upButton = document.querySelector('#upButton')
+let leftButton = document.querySelector('#leftButton')
+let rightButton = document.querySelector('#rightButton')
+let downButton = document.querySelector('#downButton')
+let scoreSpan = document.querySelector('#score')
+
+scoreSpan.innerHTML = score;
+
 
 // helper game function
 function main(ctime)
@@ -31,17 +42,17 @@ function main(ctime)
 function isCollide(snakeArr)
 {
     for(let i=1;i<snakeArr.length;i++){
-        if(snakeArr[0].x === snakeArr[i].x && snakeArr[0].y === snakeArr[i].y)
+        if((snakeArr[0].x + inputDir.x) === snakeArr[i].x && (snakeArr[0].y + inputDir.y) === snakeArr[i].y)
         {
             return true
         }
     }
-    if(snakeArr[0].x < 0 || snakeArr[0].x > 18)
+    if(snakeArr[0].x <= 0 || snakeArr[0].x >= 18)
     {
         return true;
     }
 
-    if(snakeArr[0].y < 0 || snakeArr[0].y > 18)
+    if(snakeArr[0].y <= 0 || snakeArr[0].y >= 18)
     {
         return true;
     }
@@ -64,8 +75,9 @@ function gameEngine()
         snakeArr = [
             {x:13, y:15}
         ]
-        musicSound.play();
+        // musicSound.play();
         score = 0;
+        scoreSpan.innerHTML = score;
     }
 
     // -> eat the food and locate new food
@@ -73,14 +85,21 @@ function gameEngine()
     {
         foodSound.play();
         snakeArr.unshift({x: snakeArr[0].x + inputDir.x, y: snakeArr[0].y + inputDir.y});
-        food = {x: Math.round(Math.random() * ((16-2) + 2)), y: Math.round(Math.random() * ((16-2) + 2))};
+        food = {x: Math.round(Math.random() * ((16-2) + 2)), y: Math.round(Math.random() * ((16-2+ 1) + 2))};
         console.log('eaten')
+        console.log(food)
+        score +=1;
+        scoreSpan.innerHTML = score;
+
     }
 
     // moving the snake
     for (let i = snakeArr.length-2; i >= 0; i--) {
         // const element = array[i];
         snakeArr[i+1] = {...snakeArr[i]};
+        let temp = snakeArr.map(e => ({...e}))
+        // console.log("increment: ", temp);
+        
     }
     snakeArr[0].x += inputDir.x;
     snakeArr[0].y += inputDir.y;
@@ -100,7 +119,7 @@ function gameEngine()
         else
         {
             snakeElement.classList.add('snake');
-        }
+        }  
         board.appendChild(snakeElement);
     })
 
@@ -110,15 +129,42 @@ function gameEngine()
     foodElement.style.gridColumnStart = food.x;
     foodElement.classList.add('food');
     board.appendChild(foodElement);
-
-
 }
 
 // game start
 window.requestAnimationFrame(main);
+
+leftButton.addEventListener("click", function() {
+    // Add your left action logic here
+    inputDir.x = -1;
+    inputDir.y = 0;
+    console.log("Left button clicked");
+});
+
+rightButton.addEventListener("click", function() {
+    // Add your right action logic here
+    inputDir.x = 1;
+    inputDir.y = 0;
+    console.log("Right button clicked");
+});
+
+upButton.addEventListener("click", function() {
+    // Add your up action logic here\
+    inputDir.x = 0;
+    inputDir.y = -1;
+    console.log("Up button clicked");
+});
+
+downButton.addEventListener("click", function() {
+    // Add your down action logic here
+    inputDir.x = 0;
+    inputDir.y = 1;
+    console.log("Down button clicked");
+});
+
 window.addEventListener('keydown', e => {
     inputDir = {x:0, y:1};
-    musicSound.play()
+    // musicSound.play()
     moveSound.play();
     switch (e.key) {
         case "ArrowUp":

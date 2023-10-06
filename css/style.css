@@ -21,20 +21,91 @@ body
     display: grid;
     grid-template-rows: repeat(18, 1fr);
     grid-template-columns: repeat(18, 1fr);
+    opacity: 0.9;
 }
 
 .head
 {
-    background-color: red;
-
+    background: linear-gradient(red, yellow);
+    border: .25vmin solid white;
+    border-radius: 12px;
+    scale: 1.1;
+    
 }
 
 .snake
 {
     background-color: green;
+    border: .25vmin solid white;
+    border-radius: 12px;
 }
 
 .food
 {
-    background-color: black;
+    background: linear-gradient(red, purple);
+    border: .25vmin solid black;
+    border-radius: 8px;
 }
+
+.score-div
+{
+    position: absolute;
+    top: 90px;
+    right: 300px;
+    font-size: 20px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+/* buttons */
+
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    font-weight: 600;
+    /* font-size: 3em; */
+  }
+  
+  a.arrow-button {
+    margin: 1em auto;
+    width: 80px;
+    text-align: center;
+    background-color: #eee;
+    padding: 0.5em 0;
+    display: block;
+    color: #333;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    box-shadow: 1px 1px 5px 0px rgba(50, 50, 50, 0.6);
+    border-radius: 8px;
+    &:hover {
+      color: #eee;
+      background-color: #333;
+    }
+  }
+  
+  .arrow-left {
+    &:before {
+      content: '\25c4';
+      padding-right: 0.5em;
+    }
+  }
+  
+  .arrow-right {
+    &:after {
+      content: '\25ba';
+      padding-left: 0.5em;
+    }
+  }
+  
+  .arrow-down {
+    &:after {
+      content: '\25bc';
+      padding-left: 0.5em;
+    }
+  }
+  .arrow-up {
+    &:after {
+      content: '\25b2';
+      padding-left: 0.5em;
+    }
+  }
