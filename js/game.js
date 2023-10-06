@@ -25,6 +25,8 @@ let scoreSpan = document.querySelector('#score')
 scoreSpan.innerHTML = score;
 
 
+musicSound.play()
+
 // helper game function
 function main(ctime)
 {
@@ -134,8 +136,12 @@ function gameEngine()
 // game start
 window.requestAnimationFrame(main);
 
+
+// button movement
+
 leftButton.addEventListener("click", function() {
     // Add your left action logic here
+    moveSound.play();
     inputDir.x = -1;
     inputDir.y = 0;
     console.log("Left button clicked");
@@ -143,6 +149,7 @@ leftButton.addEventListener("click", function() {
 
 rightButton.addEventListener("click", function() {
     // Add your right action logic here
+    moveSound.play();
     inputDir.x = 1;
     inputDir.y = 0;
     console.log("Right button clicked");
@@ -150,6 +157,7 @@ rightButton.addEventListener("click", function() {
 
 upButton.addEventListener("click", function() {
     // Add your up action logic here\
+    moveSound.play();
     inputDir.x = 0;
     inputDir.y = -1;
     console.log("Up button clicked");
@@ -157,14 +165,16 @@ upButton.addEventListener("click", function() {
 
 downButton.addEventListener("click", function() {
     // Add your down action logic here
+    moveSound.play();
     inputDir.x = 0;
     inputDir.y = 1;
     console.log("Down button clicked");
 });
 
+
+// keyboard movement
 window.addEventListener('keydown', e => {
     inputDir = {x:0, y:1};
-    // musicSound.play()
     moveSound.play();
     switch (e.key) {
         case "ArrowUp":
